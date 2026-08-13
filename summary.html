@@ -1,7 +1,83 @@
 <!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="AZ-900 상세 핵심 요약노트"><title>요약노트 · AZ-900 Study Hub</title><link rel="stylesheet" href="css/style.css"></head><body>
 <header class="nav"><a class="brand" href="index.html"><span>AZ</span> 900 Study Hub</a><nav><a href="index.html">홈</a><a class="active" href="summary.html">요약노트</a><a href="quiz.html?mode=random">랜덤문제</a><a href="quiz.html?mode=exam">모의고사</a><a href="quiz.html?mode=wrong">오답노트</a></nav></header>
 <main class="container notes"><section class="notes-head"><p class="eyebrow">COMPLETE EXAM NOTES · 2026</p><h1>문제은행과 연결한<br>AZ-900 상세노트</h1><p>서비스 이름 암기보다 선택 기준, 책임 범위, 시험의 함정을 중심으로 정리했습니다.</p></section>
-<nav class="toc"><a href="#cloud">1. 클라우드</a><a href="#services">2. 서비스</a><a href="#security">3. ID·보안</a><a href="#governance">4. 관리</a><a href="#cost">5. 비용·지원</a><a href="#last">막판 암기</a></nav>
+<nav class="toc"><a href="#exam-extra">문제은행 보강</a><a href="#cloud">1. 클라우드</a><a href="#services">2. 서비스</a><a href="#security">3. ID·보안</a><a href="#governance">4. 관리</a><a href="#cost">5. 비용·지원</a><a href="#last">막판 암기</a></nav>
+<section id="exam-extra" class="note-section exam-extra"><div class="kicker">167 QUESTIONS CROSS-CHECKED</div><h2>문제은행 완전 보강</h2><p class="section-intro">현재 문제은행의 주제와 해설을 기존 노트에 대조해, 문제를 풀 때 실제로 선택 기준이 되는 내용을 모았습니다. 아래 표에서 문제의 핵심 단어를 찾으면 정답 후보를 빠르게 좁힐 수 있습니다.</p>
+<h3>클라우드 개념: 비슷한 용어 구분</h3><div class="table-wrap"><table><thead><tr><th>문제의 표현</th><th>정답 개념</th><th>구분 기준</th></tr></thead><tbody>
+<tr><td>하드웨어를 미리 구매하는 일회성 비용</td><td><b>CapEx</b></td><td>자본 지출. 온-프레미스 장비 구매가 대표적</td></tr>
+<tr><td>매월 사용량에 따라 지불</td><td><b>OpEx / 소비 기반</b></td><td>선불 장비 구매 없이 사용한 만큼 지불하고 사용 중단 시 과금도 중단</td></tr>
+<tr><td>요구 변화에 빠르게 배포·구성</td><td><b>민첩성</b></td><td>속도와 변화 대응 능력</td></tr>
+<tr><td>용량을 늘리거나 줄일 수 있음</td><td><b>확장성</b></td><td>수직·수평 확장을 모두 포함하는 상위 개념</td></tr>
+<tr><td>수요에 따라 자동으로 증감</td><td><b>탄력성</b></td><td>자동 확장과 축소가 핵심</td></tr>
+<tr><td>기존 VM에 CPU·RAM 추가</td><td><b>수직 확장</b></td><td>scale up/down, 한 인스턴스의 크기 변경</td></tr>
+<tr><td>VM 인스턴스 수 추가</td><td><b>수평 확장</b></td><td>scale out/in, 인스턴스 개수 변경</td></tr>
+<tr><td>장애가 있어도 계속 서비스</td><td><b>고가용성</b></td><td>가동 중지 최소화</td></tr>
+<tr><td>재해 후 다른 위치에서 복구</td><td><b>재해 복구</b></td><td>백업·복제·장애 조치로 업무 복원</td></tr>
+<tr><td>공급자가 약속한 가용성</td><td><b>SLA</b></td><td>1,000점 시험 점수와 무관한 서비스 가동 시간 약속</td></tr>
+</tbody></table></div>
+<div class="cards three"><article><b>퍼블릭 클라우드</b><p>공급자가 소유한 인프라를 여러 조직이 논리적으로 분리해 사용한다. 고객이 물리 서버를 소유하지 않는다.</p></article><article><b>프라이빗 클라우드</b><p>한 조직 전용 환경이다. 제어력은 높지만 장비와 운영 부담도 크다.</p></article><article><b>하이브리드 클라우드</b><p>온-프레미스 또는 프라이빗 환경과 퍼블릭 클라우드를 연결한다. 일부 서버만 Azure로 옮기는 상황의 답이다.</p></article></div>
+<h3>공동 책임과 서비스 모델</h3><div class="table-wrap"><table><thead><tr><th>계층</th><th>온-프레미스</th><th>IaaS</th><th>PaaS</th><th>SaaS</th></tr></thead><tbody><tr><th>물리 데이터센터·하드웨어</th><td>고객</td><td>Microsoft</td><td>Microsoft</td><td>Microsoft</td></tr><tr><th>호스트·가상화</th><td>고객</td><td>Microsoft</td><td>Microsoft</td><td>Microsoft</td></tr><tr><th>운영 체제</th><td>고객</td><td><b>고객</b></td><td>Microsoft</td><td>Microsoft</td></tr><tr><th>애플리케이션</th><td>고객</td><td>고객</td><td><b>고객</b></td><td>Microsoft</td></tr><tr><th>데이터·계정·접근 설정</th><td>고객</td><td>고객</td><td>고객</td><td><b>고객 책임이 남음</b></td></tr></tbody></table></div>
+<ul class="key-list"><li><b>IaaS:</b> VM처럼 OS를 직접 구성하고 기존 애플리케이션을 설치해야 할 때 선택</li><li><b>PaaS:</b> 서버와 OS 관리보다 사용자 지정 앱 개발에 집중할 때 선택</li><li><b>SaaS:</b> 완성된 소프트웨어를 월간·연간 구독으로 바로 사용할 때 선택</li><li><b>서버리스:</b> 서버가 없는 것이 아니라 서버 프로비저닝·패치를 공급자가 숨겨 주는 실행 모델</li><li><b>기본 클라우드 서비스:</b> 모든 주요 공급자가 제공하는 가장 기본적인 두 자원은 컴퓨팅과 스토리지</li></ul>
+<h3>Azure 물리·논리 구조</h3><div class="table-wrap"><table><thead><tr><th>개념</th><th>시험에서 알아야 할 내용</th></tr></thead><tbody>
+<tr><th>지리(Geography)</th><td>데이터 보존과 규정 준수 경계를 고려한 시장 단위. 리전 쌍은 일반적으로 같은 지리 안에서 구성</td></tr>
+<tr><th>리전</th><td>하나 이상의 데이터센터가 저지연 네트워크로 연결된 배포 위치</td></tr>
+<tr><th>리전 쌍</th><td>재해 복구와 플랫폼 업데이트 순서에 활용되는 두 리전 관계. 한 리전 전체 장애 대비</td></tr>
+<tr><th>가용성 영역</th><td>한 리전 안에서 전원·냉각·네트워크가 독립된 물리 위치. VM, 관리 디스크, Load Balancer, SQL Database 등에 사용</td></tr>
+<tr><th>관리 그룹</th><td>여러 구독에 Policy와 RBAC를 상속시키는 최상위 거버넌스 범위</td></tr>
+<tr><th>구독</th><td>청구·액세스·할당량 경계. 기본적으로 구독별 청구 보고서와 청구서 생성</td></tr>
+<tr><th>리소스 그룹</th><td>리소스를 결합·관리하는 논리 컨테이너. 서로 다른 리전의 리소스를 포함할 수 있음</td></tr>
+<tr><th>리소스</th><td>VM, storage001 같은 스토리지 계정, VNet 등 관리 가능한 개별 항목</td></tr>
+<tr><th>관리 단위</th><td>Microsoft Entra 사용자·그룹 관리 권한을 조직·지역별로 위임하는 범위. Azure 구독 관리용이 아님</td></tr>
+</tbody></table></div><div class="trap"><b>범위 상속</b>관리 그룹 → 구독 → 리소스 그룹 → 리소스 순서다. 상위 범위의 RBAC와 Policy는 하위 범위에 상속된다. 리소스 잠금은 구독·리소스 그룹·개별 리소스에 적용할 수 있지만 관리 그룹이나 리전에는 적용하지 않는다.</div>
+<h3>컴퓨팅: 상황별 선택</h3><div class="table-wrap"><table><thead><tr><th>요구 사항</th><th>선택</th><th>핵심</th></tr></thead><tbody>
+<tr><td>OS를 직접 선택·관리</td><td><b>Azure VM</b></td><td>물리 컴퓨터의 소프트웨어 에뮬레이션</td></tr>
+<tr><td>사용하지 않는 VM 컴퓨팅 비용 중단, 디스크 보존</td><td><b>할당 해제</b></td><td>단순 OS 종료는 호스트 할당이 남아 과금될 수 있음. 디스크·일부 IP 비용은 계속 발생 가능</td></tr>
+<tr><td>동일한 VM을 여러 개 자동 확장</td><td><b>VM Scale Sets</b></td><td>부하 변화에 따라 인스턴스 수 조절</td></tr>
+<tr><td>웹앱·REST API, OS 관리 불필요</td><td><b>App Service</b></td><td>웹 호스팅 PaaS</td></tr>
+<tr><td>이벤트 발생 시 짧은 코드 실행</td><td><b>Azure Functions</b></td><td>서버리스, 실행량 중심 과금</td></tr>
+<tr><td>컨테이너 하나를 빠르게 실행</td><td><b>Container Instances</b></td><td>오케스트레이터 없이 컨테이너 실행</td></tr>
+<tr><td>다수 컨테이너 배포·확장·복구</td><td><b>AKS</b></td><td>관리형 Kubernetes 오케스트레이션</td></tr>
+<tr><td>클라우드 Windows 데스크톱 제공</td><td><b>Azure Virtual Desktop</b></td><td>가상 데스크톱과 원격 앱</td></tr>
+<tr><td>상태 저장·비저장 마이크로서비스</td><td><b>Service Fabric</b></td><td>분산 애플리케이션 플랫폼</td></tr>
+</tbody></table></div>
+<h3>네트워크: 이름이 비슷한 서비스</h3><div class="table-wrap"><table><thead><tr><th>서비스</th><th>용도</th><th>오답과 구별</th></tr></thead><tbody>
+<tr><th>VNet</th><td>Azure의 격리된 사설 네트워크</td><td>Subnet은 VNet 주소 공간을 나눈 하위 범위</td></tr>
+<tr><th>VNet Peering</th><td>두 VNet을 Azure 백본에서 사설 연결</td><td>온-프레미스 연결 서비스가 아님</td></tr>
+<tr><th>VPN Gateway</th><td>인터넷 위 암호화 터널로 온-프레미스와 VNet 연결</td><td>사이트 간 연결 또는 개별 사용자 지점 간 연결</td></tr>
+<tr><th>ExpressRoute</th><td>연결 공급자를 통한 전용 사설 회선</td><td>일반 인터넷을 통과하지 않으며 안정적이나 비용이 큼</td></tr>
+<tr><th>Local Network Gateway</th><td>Azure에서 온-프레미스 VPN 장치와 주소 범위를 표현</td><td>Azure 쪽 게이트웨이 자체는 Virtual Network Gateway</td></tr>
+<tr><th>NSG</th><td>서브넷·NIC의 인바운드/아웃바운드 L3·L4 규칙</td><td>분산된 기본 트래픽 필터</td></tr>
+<tr><th>Azure Firewall</th><td>여러 네트워크의 상태 저장 중앙 방화벽과 NAT 규칙</td><td>인터넷에서 내부 서버로 주소를 변환하는 규칙은 DNAT</td></tr>
+<tr><th>Bastion</th><td>VM 공용 IP 없이 브라우저에서 RDP·SSH</td><td>온-프레미스 네트워크 연결이나 방화벽이 아님</td></tr>
+<tr><th>DDoS Protection</th><td>대규모 분산 서비스 거부 공격 완화</td><td>일반 포트별 접근 제어는 NSG/Firewall</td></tr>
+<tr><th>CDN</th><td>이미지·영상 같은 정적 콘텐츠를 사용자 가까운 에지에 캐시</td><td>DNS 이름 확인이나 네트워크 연결 서비스가 아님</td></tr>
+</tbody></table></div>
+<h3>스토리지: 문제의 데이터 형태로 선택</h3><div class="table-wrap"><table><thead><tr><th>서비스</th><th>데이터·접근 방식</th><th>대표 문제 표현</th></tr></thead><tbody>
+<tr><th>Blob Storage</th><td>HTTP(S)로 접근하는 비정형 개체</td><td>이미지·문서 직접 제공, 동영상, 로그, 백업·복원</td></tr>
+<tr><th>Azure Files</th><td>SMB 또는 NFS 관리형 파일 공유</td><td>여러 VM에서 네트워크 드라이브처럼 탑재</td></tr>
+<tr><th>Disk Storage</th><td>VM용 영구 블록 스토리지</td><td>운영 체제 디스크·데이터 디스크</td></tr>
+<tr><th>Queue Storage</th><td>대량의 단순 비동기 메시지</td><td>애플리케이션 구성 요소를 느슨하게 연결</td></tr>
+<tr><th>Table Storage</th><td>스키마 없는 키/특성 NoSQL</td><td>대규모 구조화 비관계형 데이터</td></tr>
+</tbody></table></div>
+<div class="cards"><article><b>Hot</b><p>자주 접근. 저장 비용은 가장 높지만 접근 비용은 낮고 즉시 읽기.</p></article><article><b>Cool / Cold</b><p>접근 빈도가 낮은 데이터. 저장비는 낮아지고 접근·조기 삭제 비용 조건이 늘어남.</p></article><article><b>Archive</b><p>거의 사용하지 않는 오프라인 계층. 저장비는 가장 낮지만 읽기 전에 재수화가 필요.</p></article><article><b>중복성</b><p>LRS는 단일 데이터센터, ZRS는 리전 내 여러 영역, GRS는 보조 리전, GZRS는 영역과 보조 리전을 결합.</p></article></div>
+<h3>데이터·분석·메시징 선택표</h3><div class="table-wrap"><table><tbody><tr><th>Azure SQL Database</th><td>관리형 관계형 SQL PaaS. 테이블·관계·트랜잭션</td></tr><tr><th>Cosmos DB</th><td>JSON 등 NoSQL, 낮은 지연, 글로벌 다중 리전 쓰기</td></tr><tr><th>Synapse Analytics</th><td>데이터 웨어하우스와 빅데이터 통합 분석</td></tr><tr><th>Databricks</th><td>Apache Spark 기반 대규모 데이터 처리·머신러닝 협업</td></tr><tr><th>Event Hubs</th><td>초당 대량의 이벤트·텔레메트리 스트림 수집</td></tr><tr><th>Service Bus</th><td>순서·중복 탐지·트랜잭션이 필요한 기업 메시지 큐와 토픽</td></tr></tbody></table></div>
+<h3>ID·인증·권한: 세 질문을 분리</h3><div class="cards"><article><b>인증(Authentication)</b><p>“누구인가?”를 확인한다. Microsoft Entra ID가 클라우드 ID와 인증을 제공한다.</p></article><article><b>권한 부여(Authorization)</b><p>“무엇을 할 수 있는가?”를 결정한다. Azure 리소스 권한은 RBAC 역할과 범위로 제어한다.</p></article><article><b>SSO</b><p>한 번 인증해 여러 앱에 접근한다. 여러 앱마다 암호를 다시 입력하는 부담을 줄인다.</p></article><article><b>MFA</b><p>암호 외에 휴대폰 앱·코드·전화·생체 등 추가 요소를 요구한다.</p></article><article><b>조건부 액세스</b><p>사용자·위치·장치·로그인 위험 신호를 보고 MFA 요구 또는 접근 차단을 결정한다.</p></article><article><b>Verified ID</b><p>조직이 발급하고 사용자가 제시할 수 있는 검증 가능한 디지털 자격 증명.</p></article><article><b>Entra ID Protection</b><p>위험 사용자와 위험 로그인을 탐지하고 위험 기반 정책에 활용.</p></article><article><b>Entra Domain Services</b><p>도메인 컨트롤러를 직접 관리하지 않고 도메인 가입·LDAP·Kerberos·NTLM 제공.</p></article></div>
+<h3>보안 서비스와 정보 보호</h3><div class="table-wrap"><table><tbody><tr><th>Key Vault</th><td>앱 비밀, 암호화 키, 인증서를 중앙 금고에 보관</td></tr><tr><th>Defender for Cloud</th><td>보안 태세, Secure Score, 권장 사항, 서버·컨테이너 등 워크로드 보호</td></tr><tr><th>Microsoft Sentinel</th><td>여러 소스의 보안 이벤트를 수집·분석하는 클라우드 SIEM/SOAR</td></tr><tr><th>Azure Information Protection</th><td>문서·전자 메일을 민감도에 따라 분류·레이블·보호</td></tr><tr><th>심층 방어</th><td>물리→ID→경계→네트워크→컴퓨팅→앱→데이터의 여러 계층으로 보호</td></tr><tr><th>Zero Trust</th><td>명시적 확인, 최소 권한, 침해 가정</td></tr></tbody></table></div>
+<h3>거버넌스: 문제 문장만 보고 고르기</h3><div class="table-wrap"><table><thead><tr><th>문제에서 요구하는 것</th><th>정답</th><th>주의</th></tr></thead><tbody>
+<tr><td>특정 리전·VM 크기만 허용, 비준수 감사·거부</td><td><b>Azure Policy</b></td><td>권한 부여 도구가 아님. 관련 정책 묶음은 Initiative</td></tr>
+<tr><td>사용자에게 리소스 그룹 관리 권한</td><td><b>Azure RBAC</b></td><td>역할 + 보안 주체 + 범위의 조합</td></tr>
+<tr><td>실수로 삭제 또는 변경 방지</td><td><b>Resource lock</b></td><td>CanNotDelete와 ReadOnly. 권한이 있어도 잠금을 먼저 제거해야 함</td></tr>
+<tr><td>부서·환경·소유자별 비용 분류</td><td><b>Tags</b></td><td>리소스 위치나 권한은 바꾸지 않으며 기본적으로 자동 상속되지 않음</td></tr>
+<tr><td>데이터 검색·분류·계보</td><td><b>Microsoft Purview</b></td><td>Azure 리소스 배포 정책은 Policy</td></tr>
+<tr><td>규정 준수 개선 작업과 점수</td><td><b>Compliance Manager</b></td><td>감사 보고서 다운로드 장소는 Service Trust Portal</td></tr>
+</tbody></table></div>
+<h3>관리·배포 도구</h3><div class="table-wrap"><table><tbody><tr><th>Azure Portal</th><td>웹 GUI. 리소스와 Microsoft Entra 사용자를 만들고 구성. 기존 VM의 가용성 영역을 단순 변경하는 기능은 아님</td></tr><tr><th>Azure CLI</th><td><code>az</code> 명령. Bash와 Linux 관리자에게 익숙함</td></tr><tr><th>Azure PowerShell</th><td>PowerShell cmdlet로 Azure 관리</td></tr><tr><th>Cloud Shell</th><td>브라우저에서 Azure CLI(Bash) 또는 Azure PowerShell을 실행하는 관리 셸</td></tr><tr><th>ARM</th><td>리소스 배포·관리 계층. 인증, RBAC, 잠금, 태그를 일관되게 처리</td></tr><tr><th>ARM Template</th><td>JSON 선언형 IaC. 같은 환경을 반복 배포하며 Portal에서도 배포 가능</td></tr><tr><th>Bicep</th><td>ARM보다 간결한 선언형 언어이며 배포 시 ARM으로 변환</td></tr><tr><th>Azure Arc</th><td>온-프레미스·타사 클라우드 서버와 Kubernetes를 Azure로 이전하지 않고 관리·거버넌스 적용</td></tr><tr><th>Azure Repos</th><td>Git 또는 TFVC 기반 소스 코드 버전 제어</td></tr><tr><th>Marketplace</th><td>Microsoft와 파트너의 VM 이미지·솔루션을 검색하고 배포</td></tr></tbody></table></div>
+<h3>모니터링: 무엇을 보고 싶은가?</h3><div class="table-wrap"><table><tbody><tr><th>Azure Monitor</th><td>메트릭·로그·경고의 통합 플랫폼. CPU 임계값을 이용한 자동 확장 트리거</td></tr><tr><th>Log Analytics</th><td>Log Analytics 작업 영역의 로그를 KQL로 조회·분석</td></tr><tr><th>Application Insights</th><td>웹앱 요청, 응답 시간, 실패, 종속성, 사용자 동작을 분석하는 APM</td></tr><tr><th>Activity Log</th><td>구독 제어 평면에서 누가 리소스를 만들고 변경·삭제했는지 기록</td></tr><tr><th>Azure Advisor</th><td>비용, 안정성, 보안, 성능, 운영 우수성에 대한 개인화 권장 사항과 알림</td></tr><tr><th>Service Health</th><td>내 구독에 영향을 주는 장애, 계획된 유지 관리, 상태 권고 및 장애 후 RCA</td></tr><tr><th>Azure Status</th><td>로그인 없이 보는 전 세계 Azure 서비스의 공개 상태</td></tr></tbody></table></div>
+<h3>비용·청구·지원·수명주기</h3><div class="table-wrap"><table><tbody>
+<tr><th>Pricing Calculator</th><td>배포 전 Azure 리소스 구성의 예상 월 비용 계산</td></tr><tr><th>TCO Calculator</th><td>온-프레미스 운영 비용과 Azure 이전 후 비용 비교</td></tr><tr><th>Cost Management + Billing</th><td>비용 분석, 예산·경고, 과거 보고서, 향후 사용량·지출 예측, 내보내기. 배포 전 TCO 계산이나 선결제 할인 자체를 제공하는 도구는 아님</td></tr><tr><th>Reservations</th><td>예측 가능한 자원 사용을 1년 또는 3년 약정해 할인</td></tr><tr><th>Azure Hybrid Benefit</th><td>적격 Windows Server·SQL Server 라이선스를 활용해 비용 절감</td></tr><tr><th>Tags</th><td>리소스 위치를 바꾸지 않고 부서·프로젝트별 비용 연결</td></tr><tr><th>Quota</th><td>구독별 서비스 사용 한도. 필요하면 지원 요청으로 증액 신청</td></tr><tr><th>데이터 전송</th><td>일반적으로 인바운드는 무료이고 인터넷 아웃바운드는 과금될 수 있음</td></tr><tr><th>Preview</th><td>Private Preview는 초대 사용자, Public Preview는 공개 시험 단계. 일반적으로 SLA가 없음</td></tr><tr><th>GA</th><td>정식 출시 상태. 지원 및 SLA 조건이 적용될 수 있음</td></tr><tr><th>Modern Lifecycle</th><td>서비스를 계속 제공하고 고객이 최신 상태를 유지하는 정책. 서비스 종료 전 사전 통지 확인</td></tr>
+</tbody></table></div>
+<h3>개인정보와 규정 준수 문서</h3><ul class="key-list"><li><b>GDPR:</b> EU 개인의 개인정보 처리·보호 권리를 규정하며 조직의 위치보다 EU 개인 데이터 처리 여부가 중요</li><li><b>Microsoft Privacy Statement:</b> Microsoft가 개인 데이터를 어떤 목적으로 수집하고 사용하는지 설명</li><li><b>Data Protection Addendum:</b> 온라인 서비스의 고객 데이터 처리와 보안에 관한 계약 조건</li><li><b>Service Trust Portal:</b> 감사 보고서, 규정 준수 인증서와 신뢰 문서 제공</li><li><b>Trust Center:</b> Microsoft의 보안·개인정보·규정 준수 원칙과 정보를 설명</li></ul>
+<div class="trap"><b>마지막 선택 공식</b>누가 작업할 수 있나=RBAC, 무엇을 배포할 수 있나=Policy, 삭제·변경을 막나=Lock, 비용을 분류하나=Tag, 개선 권장인가=Advisor, 내 구독 장애인가=Service Health, 메트릭·로그인가=Monitor.</div></section>
 <section id="cloud" class="note-section"><div class="kicker">25–30% · DOMAIN 1</div><h2>클라우드 개념</h2><h3>배포 모델</h3><div class="cards three"><article><b>퍼블릭</b><p>공급자 인프라를 여러 고객이 논리적으로 분리해 사용. 사용량 과금·셀프서비스.</p></article><article><b>프라이빗</b><p>한 조직 전용. 제어력은 높지만 장비·운영 비용 부담.</p></article><article><b>하이브리드</b><p>온-프레미스/프라이빗과 퍼블릭을 연결. 규제·점진적 이전·버스트에 적합.</p></article></div><div class="callout"><b>CapEx → OpEx</b><span>서버를 미리 구매하는 자본 지출 대신 사용한 만큼 운영 비용으로 지불한다. PAYG는 소비 기반 모델이다.</span></div>
 <h3>IaaS · PaaS · SaaS</h3><div class="table-wrap"><table><thead><tr><th>유형</th><th>고객 책임</th><th>대표 예</th><th>선택 상황</th></tr></thead><tbody><tr><td><b>IaaS</b></td><td>OS·패치·앱·데이터·네트워크 설정</td><td>Azure VM</td><td>레거시 앱, OS 제어</td></tr><tr><td><b>PaaS</b></td><td>앱·데이터·접근 설정</td><td>App Service, Azure SQL Database</td><td>인프라 대신 개발 집중</td></tr><tr><td><b>SaaS</b></td><td>사용자·데이터·서비스 설정</td><td>Microsoft 365, Dynamics 365</td><td>완성된 소프트웨어 사용</td></tr></tbody></table></div><div class="trap"><b>공유 책임</b>물리 데이터센터와 하드웨어는 항상 공급자 책임. IaaS의 게스트 OS는 고객 책임이다. SaaS에서도 데이터·계정·접근 책임은 사라지지 않는다.</div>
 <h3>이점과 용어</h3><ul class="key-list"><li><b>고가용성:</b> 장애 중에도 서비스가 사용 가능한 상태</li><li><b>내결함성:</b> 일부 구성 요소가 고장 나도 계속 동작</li><li><b>재해 복구:</b> 대규모 장애 후 다른 위치에서 복구</li><li><b>확장성:</b> 수직(성능 증가) 또는 수평(인스턴스 증가) 확장</li><li><b>탄력성:</b> 수요에 따라 자동으로 늘고 줄어 비용 최적화</li><li><b>민첩성:</b> 요구 변화에 빠르게 리소스를 배포·변경</li><li><b>서버리스:</b> 서버 관리 없이 이벤트 기반 실행·실행량 과금</li></ul>

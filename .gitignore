@@ -1,0 +1,10 @@
+# Original Hangul documents are local-only source material.
+hwp/
+*.hwp
+*.hwpx
+
+# Copyrighted reference books are local-only and must not be published.
+resources/
+
+node_modules/
+.DS_Store

@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="AZ-900 Microsoft Azure Fundamentals 한국어 요약노트와 모의고사">
+  <title>AZ-900 Study Hub</title><link rel="stylesheet" href="css/style.css">
+</head>
+<body><header class="nav"><a class="brand" href="index.html"><span>AZ</span> 900 Study Hub</a><nav><a class="active" href="index.html">홈</a><a href="summary.html">요약노트</a><a href="quiz.html?mode=random">랜덤문제</a><a href="quiz.html?mode=exam">모의고사</a><a href="quiz.html?mode=wrong">오답노트</a></nav></header>
+<main class="container">
+  <section class="hero"><div><p class="eyebrow">MICROSOFT AZURE FUNDAMENTALS</p><h1>흩어진 개념을<br><em>합격 점수</em>로 연결하세요.</h1><p class="lead">2026년 1월 14일 공식 출제 기준에 맞춘 한국어 핵심노트, 랜덤 퀴즈, 시간 제한 모의고사입니다.</p><div class="actions"><a class="btn" href="summary.html">요약노트 시작</a><a class="btn ghost" href="quiz.html?mode=exam">모의고사 응시</a></div></div><aside class="exam-card"><small>합격 기준</small><strong>700<sup>/1000</sup></strong><p>실전은 45분 · 이 사이트 모의고사는 30문제 / 35분</p></aside></section>
+  <section class="stats"><article><b id="questionCount">—</b><span>연습문제</span></article><article><b>3</b><span>공식 대영역</span></article><article><b id="attemptCount">0</b><span>모의고사 응시</span></article><article><b id="wrongCount">0</b><span>복습할 오답</span></article></section>
+  <section><div class="section-title"><p class="eyebrow">EXAM BLUEPRINT</p><h2>점수 비중대로 공부하기</h2></div><div class="domain-grid"><a href="summary.html#cloud"><span>01</span><h3>클라우드 개념</h3><b>25–30%</b><p>공유 책임, 클라우드 모델, 소비 기반, IaaS·PaaS·SaaS</p></a><a href="summary.html#services"><span>02</span><h3>Azure 아키텍처와 서비스</h3><b>35–40%</b><p>리전, 컴퓨팅, 네트워크, 스토리지, ID와 보안</p></a><a href="summary.html#governance"><span>03</span><h3>관리와 거버넌스</h3><b>30–35%</b><p>비용, Policy, ARM, 모니터링과 Service Health</p></a></div></section>
+  <section class="quick"><div><p class="eyebrow">SMART PRACTICE</p><h2>오늘은 무엇을 할까요?</h2></div><div><a class="quick-link" href="quiz.html?mode=random"><b>랜덤 10문제</b><span>바로 채점하고 해설 확인 →</span></a><a class="quick-link" href="quiz.html?mode=wrong"><b>오답만 다시 풀기</b><span>브라우저에 자동 저장 →</span></a></div></section>
+</main><footer>비공식 개인 학습 도구 · 최신 범위는 Microsoft Learn에서 다시 확인하세요.</footer>
+<script src="js/data.js"></script><script>loadQuestions().then(x=>questionCount.textContent=x.length);attemptCount.textContent=getHistory().length;wrongCount.textContent=getWrongIds().length;</script></body></html>

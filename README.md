@@ -2,6 +2,10 @@
 
 Microsoft Azure Fundamentals(AZ-900)를 준비하기 위한 한국어 정적 학습 사이트입니다. 요약노트와 `resources`의 덤프 PDF에서 선별·번역한 연습문제를 제공합니다.
 
+## 바로가기
+
+- [AZ-900 Study Hub 바로가기](https://alicia6-6.github.io/Azure_AZ-900/index.html)
+
 ## 기능
 
 - 출제 비중을 반영한 핵심 요약노트

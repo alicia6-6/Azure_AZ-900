@@ -1,6 +1,6 @@
 const mode=new URLSearchParams(location.search).get('mode')||'random';
 const $=id=>document.getElementById(id);
-let all=[],queue=[],index=0,answers=[],reviewed=new Set(),timerId=null,remaining=2700,submitted=false;
+let all=[],queue=[],index=0,answers=[],timerId=null,remaining=2700,submitted=false;
 const info={random:['RANDOM PRACTICE','랜덤 10문제','단일·복수 선택 문제를 풀고 즉시 해설을 확인합니다.'],exam:['MOCK EXAM','AZ-900 실전 모의고사','50문제 · 45분 · 영역별 출제 비중 적용 · 35개 이상 학습 합격'],wrong:['REVIEW','오답노트','이전에 틀린 문제만 다시 풉니다.']};
 const correctSet=q=>new Set(q.answers||[q.answer]);
 const sameSet=(a,b)=>a.size===b.size&&[...a].every(v=>b.has(v));
@@ -26,13 +26,12 @@ function render(){
   $('scoreText').textContent=mode==='exam'?`${answered}문제 답변`:`정답 ${queue.filter((x,i)=>isCorrect(x,answers[i])).length}`;
   $('progressFill').style.width=`${(index+1)/queue.length*100}%`;
   const source=q.officialSource?'Microsoft 공식':`자료 Q${q.sourceQuestion}`;
-  const navigator=mode==='exam'?`<section class="answer-status"><div class="status-head"><b>답안 현황</b><span>${answered} / ${queue.length} 답변 · ${reviewed.size}개 검토</span></div><div class="question-map">${queue.map((_,i)=>`<button data-q="${i}" class="${i===index?'current':''} ${answers[i]?.choices?.length?'answered':''} ${reviewed.has(i)?'marked':''}" aria-label="${i+1}번 문제">${i+1}</button>`).join('')}</div><div class="map-legend"><span><i class="legend-current"></i>현재</span><span><i class="legend-answered"></i>답변 완료</span><span><i class="legend-marked"></i>검토</span></div></section>`:'';
+  const navigator=mode==='exam'?`<section class="answer-status"><div class="status-head"><b>답안 현황</b><span>${answered} / ${queue.length} 답변</span></div><div class="question-map">${queue.map((_,i)=>`<button data-q="${i}" class="${i===index?'current':''} ${answers[i]?.choices?.length?'answered':''}" aria-label="${i+1}번 문제">${i+1}</button>`).join('')}</div></section>`:'';
   const choiceLabel=i=>mode==='exam'?i+1:String.fromCharCode(65+i);
-  const nav=mode==='exam'?`<div class="exam-nav"><a class="btn exit-btn" href="index.html">나가기</a><div><button class="btn ghost" id="prev" ${index===0?'disabled':''}>이전</button><button class="review-btn ${reviewed.has(index)?'active':''}" id="review">${reviewed.has(index)?'★ 검토 중':'☆ 검토'}</button>${index<queue.length-1?'<button class="btn ghost" id="next">다음</button>':''}<button class="btn" id="submit">답안 제출</button></div></div>`:`<div class="qnav"><button class="btn ghost" id="prev" ${index===0?'disabled':''}>이전</button>${index===queue.length-1?'<button class="btn" id="submit">결과 보기</button>':'<button class="btn" id="next">다음</button>'}</div>`;
+  const nav=mode==='exam'?`<div class="exam-nav"><a class="btn exit-btn" href="index.html">나가기</a><div><button class="btn ghost" id="prev" ${index===0?'disabled':''}>이전</button>${index<queue.length-1?'<button class="btn ghost" id="next">다음</button>':''}<button class="btn" id="submit">답안 제출</button></div></div>`:`<div class="qnav"><button class="btn ghost" id="prev" ${index===0?'disabled':''}>이전</button>${index===queue.length-1?'<button class="btn" id="submit">결과 보기</button>':'<button class="btn" id="next">다음</button>'}</div>`;
   $('quizArea').innerHTML=`${navigator}<article class="question ${mode==='exam'?'exam-question':''}"><div class="qmeta"><span>${q.domain}</span><span>${q.topic}</span><span>${source}</span>${multi?'<span>복수 선택</span>':''}</div><div class="qnum">QUESTION ${String(index+1).padStart(2,'0')}</div><h2>${q.question}</h2>${multi?'<p class="multi-note">해당하는 답변을 모두 선택하세요.</p>':''}<div class="choices">${q.choices.map((c,i)=>`<button data-i="${i}" class="${a?.choices?.includes(i)?'selected':''}" ${locked?'disabled':''}><i>${choiceLabel(i)}</i><span>${c}</span></button>`).join('')}</div>${multi&&!locked&&mode!=='exam'?'<button class="confirm-answer" id="confirmAnswer">선택 확정</button>':''}${locked?feedback(q,a):''}${nav}</article>`;
   document.querySelectorAll('.choices button[data-i]').forEach(b=>b.onclick=()=>choose(+b.dataset.i));
   document.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>{index=+b.dataset.q;render()});
-  const rv=$('review');if(rv)rv.onclick=()=>{reviewed.has(index)?reviewed.delete(index):reviewed.add(index);render()};
   const c=$('confirmAnswer');if(c)c.onclick=confirmMulti;
   $('prev').onclick=()=>{index--;render()};const n=$('next');if(n)n.onclick=()=>{index++;render()};const s=$('submit');if(s)s.onclick=()=>submit(false);
 }

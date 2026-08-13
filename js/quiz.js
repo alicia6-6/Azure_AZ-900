@@ -1,6 +1,7 @@
 const mode=new URLSearchParams(location.search).get('mode')||'random';
 const $=id=>document.getElementById(id);
-let all=[],queue=[],index=0,answers=[],timerId=null,remaining=2700,submitted=false;
+const EXAM_COUNT=50,EXAM_SECONDS=45*60,PRACTICE_PASS=35;
+let all=[],queue=[],index=0,answers=[],timerId=null,remaining=EXAM_SECONDS,submitted=false;
 const info={random:['PRACTICE','랜덤 문제','전체 문제은행에서 무작위 문제를 가볍게 학습합니다.'],exam:['PRACTICE','AZ-900 실전 모의고사','45분 동안 50문제를 풀고, 제출한 뒤 점수와 해설을 확인하세요.'],wrong:['REVIEW','오답노트','이전에 틀린 문제만 다시 풉니다.']};
 const correctSet=q=>new Set(q.answers||[q.answer]);
 const sameSet=(a,b)=>a.size===b.size&&[...a].every(v=>b.has(v));
@@ -11,7 +12,7 @@ const easyHelp=q=>{
   return guides[q.topic]||guides[Object.keys(guides).find(k=>q.topic.includes(k))]||'서비스 이름보다 누가 관리하는지, 어느 범위에 적용되는지, 어떤 문제를 해결하는지를 먼저 구분하세요.';
 };
 function examDomain(q){if(q.domain==='클라우드 개념')return'cloud';if(q.domain.includes('아키텍처')||q.domain.includes('ID'))return'architecture';return'management'}
-function buildExam(){const counts={cloud:14,architecture:19,management:17};return Object.entries(counts).flatMap(([d,n])=>shuffle(all.filter(q=>examDomain(q)===d)).slice(0,n)).sort(()=>Math.random()-.5)}
+function buildExam(){const counts={cloud:14,architecture:19,management:17};const exam=Object.entries(counts).flatMap(([d,n])=>shuffle(all.filter(q=>examDomain(q)===d)).slice(0,n)).sort(()=>Math.random()-.5);return exam.slice(0,EXAM_COUNT)}
 async function init(){
   [$('modeKicker').textContent,$('modeTitle').textContent,$('modeDesc').textContent]=info[mode]||info.random;
   try{all=await loadQuestions()}catch(e){return fail(e.message)}
@@ -38,15 +39,16 @@ function render(){
 }
 function choose(choice){const q=queue[index],multi=Array.isArray(q.answers);if(multi){const selected=new Set(answers[index]?.choices||[]);selected.has(choice)?selected.delete(choice):selected.add(choice);answers[index]={choices:[...selected],locked:mode==='exam'}}else{answers[index]={choices:[choice],locked:mode!=='exam'};if(mode!=='exam')setWrong(q.id,!isCorrect(q,answers[index]))}render()}
 function confirmMulti(){const q=queue[index],a=answers[index];if(!a?.choices.length)return;answers[index]={...a,locked:true};setWrong(q.id,!isCorrect(q,answers[index]));render()}
-function feedback(q,a){const ok=isCorrect(q,a);return `<div class="feedback ${ok?'ok':'no'}"><b>${ok?'정답입니다':'오답입니다'}</b><p>${q.explanation}</p><small>${easyHelp(q)}</small></div>`}
+function explanationParts(q){const marker='쉽게 말하면';const at=q.explanation.indexOf(marker);return at>=0?{detail:q.explanation.slice(0,at).trim(),easy:q.explanation.slice(at).trim()}:{detail:q.explanation.trim(),easy:`쉽게 말하면 ${easyHelp(q)}`}}
+function feedback(q,a){const ok=isCorrect(q,a),x=explanationParts(q);return `<div class="feedback ${ok?'ok':'no'}"><b>${ok?'정답입니다':'오답입니다'}</b><div class="explanation-detail"><strong>해설</strong><p>${x.detail}</p></div><div class="easy-explanation"><strong>쉽게 풀어보기</strong><p>${x.easy.replace(/^쉽게 말하면\s*/, '')}</p></div></div>`}
 function submit(timedOut=false){
   if(submitted)return;const unanswered=answers.filter(a=>!a?.choices?.length).length;
   if(mode==='exam'&&!timedOut&&unanswered&&!confirm(`답하지 않은 문제가 ${unanswered}개 있습니다. 그대로 제출할까요?`))return;
   submitted=true;clearInterval(timerId);queue.forEach((q,i)=>setWrong(q.id,!isCorrect(q,answers[i])));
-  const correct=queue.filter((q,i)=>isCorrect(q,answers[i])).length,pct=Math.round(correct/queue.length*100),practicePass=correct>=35,scaled=pct*10;
+  const correct=queue.filter((q,i)=>isCorrect(q,answers[i])).length,pct=Math.round(correct/queue.length*100),practicePass=correct>=PRACTICE_PASS,scaled=pct*10;
   if(mode==='exam')saveHistory({date:new Date().toISOString(),correct,total:queue.length,pct,practicePass});
   $('quizArea').hidden=true;$('quizBar').hidden=true;$('timer').hidden=true;$('resultArea').hidden=false;
-  $('resultArea').innerHTML=`<p class="eyebrow">${timedOut?'TIME EXPIRED':'RESULT'}</p><h2>${correct} / ${queue.length}</h2><strong class="result-score">${mode==='exam'?`${practicePass?'학습 합격':'학습 불합격'} · 예상 ${scaled}점`:`${pct}점`}</strong><p>${mode==='exam'?(practicePass?'35문항 이상 정답으로 모의 합격 기준을 넘었습니다.':'35문항 이상을 목표로 오답을 복습하세요.'):(pct>=70?'학습 목표를 넘었습니다.':'70%를 목표로 오답을 복습하세요.')}</p>${mode==='exam'?'<p class="score-note">실제 시험은 1~1,000점 환산 점수 중 700점 이상이 합격입니다. 난이도와 배점이 반영되므로 예상 점수와 실제 점수는 다를 수 있습니다.</p>':''}<div class="result-list">${queue.map((q,i)=>`<details class="${isCorrect(q,answers[i])?'pass':'miss'}"><summary>${i+1}. ${q.question}<b>${isCorrect(q,answers[i])?'정답':answers[i]?.choices?.length?'오답':'미응답'}</b></summary><p>${q.officialSource?'Microsoft 공식 연습 문제':`자료 Q${q.sourceQuestion}`} · 정답: ${letters(q)}</p><p>${q.explanation}</p></details>`).join('')}</div><div class="actions"><a class="btn" href="quiz.html?mode=${mode}">새 모의고사</a><a class="btn ghost" href="quiz.html?mode=wrong">오답 복습</a></div>`;
+  $('resultArea').innerHTML=`<p class="eyebrow">${timedOut?'TIME EXPIRED':'RESULT'}</p><h2>${correct} / ${queue.length}</h2><strong class="result-score">${mode==='exam'?`${practicePass?'학습 합격':'학습 불합격'} · 예상 ${scaled}점`:`${pct}점`}</strong><p>${mode==='exam'?(practicePass?'35문항 이상 정답으로 모의 합격 기준을 넘었습니다.':'35문항 이상을 목표로 오답을 복습하세요.'):(pct>=70?'학습 목표를 넘었습니다.':'70%를 목표로 오답을 복습하세요.')}</p>${mode==='exam'?'<p class="score-note">실제 시험은 1~1,000점 환산 점수 중 700점 이상이 합격입니다. 난이도와 배점이 반영되므로 예상 점수와 실제 점수는 다를 수 있습니다.</p>':''}<div class="result-list">${queue.map((q,i)=>{const x=explanationParts(q);return `<details class="${isCorrect(q,answers[i])?'pass':'miss'}"><summary>${i+1}. ${q.question}<b>${isCorrect(q,answers[i])?'정답':answers[i]?.choices?.length?'오답':'미응답'}</b></summary><p>${q.officialSource?'Microsoft 공식 연습 문제':`자료 Q${q.sourceQuestion}`} · 정답: ${letters(q)}</p><div class="result-explanation"><b>해설</b><p>${x.detail}</p><b>쉽게 풀어보기</b><p>${x.easy.replace(/^쉽게 말하면\s*/, '')}</p></div></details>`}).join('')}</div><div class="actions"><a class="btn" href="quiz.html?mode=${mode}">새 모의고사</a><a class="btn ghost" href="quiz.html?mode=wrong">오답 복습</a></div>`;
 }
 function startTimer(){$('timer').hidden=false;tick();timerId=setInterval(()=>{remaining--;tick();if(remaining<=0)submit(true)},1000)}
 function tick(){const m=String(Math.floor(remaining/60)).padStart(2,'0'),s=String(remaining%60).padStart(2,'0');$('timerText').textContent=`${m}:${s}`;$('timer').classList.toggle('urgent',remaining<=300)}
